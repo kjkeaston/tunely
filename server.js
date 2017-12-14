@@ -23,8 +23,8 @@ app.get('/', function (req, res) {
 app.get('/api', controllers.api.index);
 
 
-app.get('/api/albums', controllers.albums.index);
-app.post('/api/albums', controllers.albums.create);
+// app.get('/api/albums', controllers.albums.index);
+// app.post('/api/albums', controllers.albums.create);
 
 
 
