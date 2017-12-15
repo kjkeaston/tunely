@@ -1,5 +1,6 @@
 // controllers/albumsController.js
 var db = require('../models');
+
 // GET /api/albums
 function index(req, res) {
   db.Album.find({}, function(err, getAllAlbums) {
@@ -9,8 +10,17 @@ function index(req, res) {
 
 // POST /api/albums
 function create(req, res) {
-  // create an album based on request body and send it back as JSON
+  var genres = req.body.genres.split(', ');
+  req.body.genres = genres;
+
+  db.Album.create(req.body, function(err, album) {
+    if (err) {
+      res.json(err);
+    }
+    res.json(album);
+  })
 }
+
 
 // GET /api/albums/:albumId
 function show(req, res) {
@@ -22,11 +32,13 @@ function destroy(req, res) {
   // find one album by id, delete it, and send it back as JSON
 }
 
+
 // PUT or PATCH /api/albums/:albumId
 function update(req, res) {
   // find one album by id, update it based on request body,
   // and send it back as JSON
 }
+
 
 module.exports = {
   index: index,

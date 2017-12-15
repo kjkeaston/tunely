@@ -5,27 +5,27 @@
  *
  */
 // hard-coded data
-var sampleAlbums = [{
-  artistName: 'Ladyhawke',
-  name: 'Ladyhawke',
-  releaseDate: '2008, November 18',
-  genres: [ 'new wave', 'indie rock', 'synth pop' ]
-}, {
-  artistName: 'The Knife',
-  name: 'Silent Shout',
-  releaseDate: '2006, February 17',
-  genres: [ 'synth pop', 'electronica', 'experimental' ]
-}, {
-  artistName: 'Juno Reactor',
-  name: 'Shango',
-  releaseDate: '2000, October 9',
-  genres: [ 'electronic', 'goa trance', 'tribal house' ]
-}, {
-  artistName: 'Philip Wesley',
-  name: 'Dark Night of the Soul',
-  releaseDate: '2008, September 12',
-  genres: [ 'piano' ]
-}];
+// var sampleAlbums = [{
+//   artistName: 'Ladyhawke',
+//   name: 'Ladyhawke',
+//   releaseDate: '2008, November 18',
+//   genres: [ 'new wave', 'indie rock', 'synth pop' ]
+// }, {
+//   artistName: 'The Knife',
+//   name: 'Silent Shout',
+//   releaseDate: '2006, February 17',
+//   genres: [ 'synth pop', 'electronica', 'experimental' ]
+// }, {
+//   artistName: 'Juno Reactor',
+//   name: 'Shango',
+//   releaseDate: '2000, October 9',
+//   genres: [ 'electronic', 'goa trance', 'tribal house' ]
+// }, {
+//   artistName: 'Philip Wesley',
+//   name: 'Dark Night of the Soul',
+//   releaseDate: '2008, September 12',
+//   genres: [ 'piano' ]
+// }];
 
 
 $(document).ready(function() {
@@ -35,13 +35,25 @@ $.ajax ({
   method: "GET",
   url: "/api/albums",
   success: onSuccess,
-  error:  function onError(err) {
+  error: function onError(err) {
     console.log(err);
   }
 });
 
-function onSuccess () {
-  for (i = 0; i < sampleAlbums.length; i++) {
+$("#singlebutton").on("click", function (e) {
+  e.preventDefault();
+  var formData = $(this).serialize();
+  console.log(formData);
+
+  $.post('/api/albums', formData, function(album) {
+    console.log(album);
+  })
+  $(this).trigger("reset");
+})
+
+function onSuccess (dataPotato) {
+  console.log(dataPotato);
+  for (i = 0; i < dataPotato.length; i++) {
     $(".panel-body").append(
       `<div class='row'>
           <div class="col-md-3 col-xs-12 thumbnail album-art">
@@ -52,17 +64,17 @@ function onSuccess () {
             <ul class="list-group">
               <li class="list-group-item">
                 <h4 class='inline-header'>Album Name:</h4>
-                <span class='album-name'>${sampleAlbums[i].name}</span>
+                <span class='album-name'>${dataPotato[i].name}</span>
               </li>
 
               <li class="list-group-item">
                 <h4 class='inline-header'>Artist Name:</h4>
-                <span class='artist-name'>${sampleAlbums[i].artistName}</span>
+                <span class='artist-name'>${dataPotato[i].artistName}</span>
               </li>
 
               <li class="list-group-item">
                 <h4 class='inline-header'>Released date:</h4>
-                <span class='album-releaseDate'>${sampleAlbums[i].releaseDate}</span>
+                <span class='album-releaseDate'>${dataPotato[i].releaseDate}</span>
               </li>
             </ul>
           </div>
@@ -71,9 +83,7 @@ function onSuccess () {
   }
 }
 
-$("#singlebutton").on("click", function () {
-  console.log( );
-})
+
 
 
 

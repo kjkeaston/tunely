@@ -3,6 +3,7 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     controllers = require('./controllers'),
     db = require('./models');
+
 // generate a new express app and call it 'app'
 var app = express();
 
@@ -22,8 +23,15 @@ app.get('/', function (req, res) {
 app.get('/api', controllers.api.index);
   
 
+
 app.get('/api/albums', controllers.albums.index);
-// app.post('/api/albums', controllers.albums.create);
+
+app.post('/api/albums', controllers.albums.create);
+
+// app.get('api/albums', controllers.albums.show);
+// app.delete('/api/albums', controllers.albums.destroy);
+// app.put('/api/albums', controllers.albums.update);
+
 
 
 
