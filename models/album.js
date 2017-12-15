@@ -12,7 +12,7 @@ var AlbumSchema = new Schema({
   name: String,
   releaseDate: String,
   genres: [ String ],
-  song: [Song.schema]
+  songs: [Song.schema]
 });
 
 // album model
