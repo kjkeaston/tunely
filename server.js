@@ -34,8 +34,13 @@ app.get('/', function homepage (req, res) {
 
 // create a new route for GET /api with callback controllers.api.index
 app.get('/api', controllers.api.index);
+
 app.get('/api/albums', controllers.albums.index);
 app.post('/api/albums', controllers.albums.create);
+
+// app.get('api/albums', controllers.albums.show);
+// app.delete('/api/albums', controllers.albums.destroy);
+// app.put('/api/albums', controllers.albums.update);
 
 /**********
  * SERVER *
