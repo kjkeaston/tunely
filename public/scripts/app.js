@@ -4,8 +4,6 @@
  * into functions and objects as needed.
  *
  */
- 
-
 // hard-coded data
 var sampleAlbums = [{
   artistName: 'Ladyhawke',
@@ -72,6 +70,12 @@ function onSuccess () {
     );
   }
 }
+
+$("#singlebutton").on("click", function () {
+  console.log( );
+})
+
+
 
 
 
