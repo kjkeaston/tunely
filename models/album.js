@@ -5,7 +5,7 @@ var AlbumSchema = new Schema({
   artistName: String,
   name: String,
   releaseDate: String,
-  genres: []
+  genres: [String]
 });
 
 var Album = mongoose.model('Album', AlbumSchema);
