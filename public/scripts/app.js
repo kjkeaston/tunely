@@ -33,7 +33,16 @@ var sampleAlbums = [{
 $(document).ready(function() {
   console.log('app.js loaded!');
 
-function renderAlbum(album) {
+$.ajax ({
+  method: "GET",
+  url: "/api/albums",
+  success: onSuccess,
+  error:  function onError(err) {
+    console.log(err);
+  }
+});
+
+function onSuccess () {
   for (i = 0; i < sampleAlbums.length; i++) {
     $(".panel-body").append(
       `<div class='row'>
@@ -63,9 +72,6 @@ function renderAlbum(album) {
     );
   }
 }
-
-renderAlbum();
-
 
 
 
