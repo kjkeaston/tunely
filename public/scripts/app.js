@@ -79,7 +79,7 @@ let trackList = album.songs.map( function(song) {
 
   var albumHtml = `
     <!-- one album -->
-    <div class="row album">
+    <div class="row album" data-album-id="${album._id}">
 
       <div class="col-md-10 col-md-offset-1">
         <div class="panel panel-default">
@@ -120,6 +120,8 @@ let trackList = album.songs.map( function(song) {
             <!-- end of album internal row -->
 
             <div class='panel-footer'>
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#songModal">Add new song
+              </button>
             </div>
 
           </div>
