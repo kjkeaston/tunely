@@ -7,27 +7,27 @@
  
 
 // hard-coded data
-var sampleAlbums = [{
-  artistName: 'Ladyhawke',
-  name: 'Ladyhawke',
-  releaseDate: '2008, November 18',
-  genres: [ 'new wave', 'indie rock', 'synth pop' ]
-}, {
-  artistName: 'The Knife',
-  name: 'Silent Shout',
-  releaseDate: '2006, February 17',
-  genres: [ 'synth pop', 'electronica', 'experimental' ]
-}, {
-  artistName: 'Juno Reactor',
-  name: 'Shango',
-  releaseDate: '2000, October 9',
-  genres: [ 'electronic', 'goa trance', 'tribal house' ]
-}, {
-  artistName: 'Philip Wesley',
-  name: 'Dark Night of the Soul',
-  releaseDate: '2008, September 12',
-  genres: [ 'piano' ]
-}];
+// var sampleAlbums = [{
+//   artistName: 'Ladyhawke',
+//   name: 'Ladyhawke',
+//   releaseDate: '2008, November 18',
+//   genres: [ 'new wave', 'indie rock', 'synth pop' ]
+// }, {
+//   artistName: 'The Knife',
+//   name: 'Silent Shout',
+//   releaseDate: '2006, February 17',
+//   genres: [ 'synth pop', 'electronica', 'experimental' ]
+// }, {
+//   artistName: 'Juno Reactor',
+//   name: 'Shango',
+//   releaseDate: '2000, October 9',
+//   genres: [ 'electronic', 'goa trance', 'tribal house' ]
+// }, {
+//   artistName: 'Philip Wesley',
+//   name: 'Dark Night of the Soul',
+//   releaseDate: '2008, September 12',
+//   genres: [ 'piano' ]
+// }];
 
 
 $(document).ready(function() {
@@ -55,6 +55,7 @@ $(document).ready(function() {
 });
 
 function handleSuccess (albums) {
+  console.log(albums);
   albums.forEach(function(album) {
     renderAlbum(album);
   });
@@ -69,6 +70,13 @@ function handleError(err){
 function renderAlbum(album) {
 
   // HTML template string for each album
+let trackList = album.songs.map( function(song) {
+    let trackNumber = song.trackNumber;
+    let trackName = song.name;
+    return ` (${trackNumber}) ${trackName} `
+  });
+
+
   var albumHtml = `
     <!-- one album -->
     <div class="row album">
@@ -99,6 +107,12 @@ function renderAlbum(album) {
                     <h4 class='inline-header'>Released date:</h4>
                     <span class='album-releaseDate'>${ album.releaseDate }</span>
                   </li>
+
+                  <li class="list-group-item">
+                    <h4 class="inline-header">Songs:</h4>
+                    <span>${trackList.join("--")}</span>
+                  </li>
+
                 </ul>
               </div>
 
@@ -117,6 +131,7 @@ function renderAlbum(album) {
     </div>
     <!-- end one album -->
   `;
+  
 
   // render HTML template in the DOM
   $('#albums').prepend(albumHtml);
