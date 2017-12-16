@@ -120,7 +120,7 @@ let trackList = album.songs.map( function(song) {
             <!-- end of album internal row -->
 
             <div class='panel-footer'>
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#songModal">Add new song
+              <button type="button" class="btn btn-primary add-song" data-toggle="modal" data-target="#songModal">Add new song
               </button>
             </div>
 
@@ -132,9 +132,15 @@ let trackList = album.songs.map( function(song) {
 
     </div>
     <!-- end one album -->
-  `;
+  `
   
 
   // render HTML template in the DOM
   $('#albums').prepend(albumHtml);
 }
+
+$('#albums').on('click', '.add-song', function(e) {
+    console.log('add-song clicked!');
+    var id= $(this).closest('.album').data('album-id'); // "5665ff1678209c64e51b4e7b"
+    console.log('id',id);
+});
